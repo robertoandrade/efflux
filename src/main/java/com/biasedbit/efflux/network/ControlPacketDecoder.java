@@ -68,7 +68,7 @@ public class ControlPacketDecoder implements ChannelUpstreamHandler {
             try {
                 controlPacketList.add(ControlPacket.decode(buffer));
             } catch (Exception e1) {
-                LOG.debug("Exception caught while decoding RTCP packet.", e1);
+                LOG.warn("Exception caught while decoding RTCP packet: " + e1.getMessage());
                 break;
             }
         }
