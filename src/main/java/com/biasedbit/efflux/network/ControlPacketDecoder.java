@@ -16,9 +16,9 @@
 
 package com.biasedbit.efflux.network;
 
-import com.biasedbit.efflux.logging.Logger;
-import com.biasedbit.efflux.packet.CompoundControlPacket;
-import com.biasedbit.efflux.packet.ControlPacket;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.ChannelEvent;
 import org.jboss.netty.channel.ChannelHandlerContext;
@@ -26,8 +26,9 @@ import org.jboss.netty.channel.ChannelUpstreamHandler;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.MessageEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.biasedbit.efflux.logging.Logger;
+import com.biasedbit.efflux.packet.CompoundControlPacket;
+import com.biasedbit.efflux.packet.ControlPacket;
 
 /**
  * @author <a href="http://bruno.biasedbit.com/">Bruno de Carvalho</a>
@@ -68,7 +69,7 @@ public class ControlPacketDecoder implements ChannelUpstreamHandler {
             try {
                 controlPacketList.add(ControlPacket.decode(buffer));
             } catch (Exception e1) {
-                LOG.warn("Exception caught while decoding RTCP packet: " + e1.getMessage());
+                //LOG.warn("Exception caught while decoding RTCP packet: " + e1.getMessage());
                 break;
             }
         }
