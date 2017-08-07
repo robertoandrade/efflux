@@ -50,7 +50,7 @@ public abstract class ControlPacket {
         boolean hasPadding = (b & 0x20) > 0; // mask 0010 0000
         byte innerBlocks = (byte) (b & 0x1f); // mask 0001 1111
 
-        byte controlPacketType = buffer.readByte();
+        byte controlPacketType = (byte) (buffer.readByte() & 0x7f); // mask 0111 1111
         ControlPacket.Type type = ControlPacket.Type.fromByte(controlPacketType);
 
         // This length is in 32bit (4byte) words. These first 4 bytes already read don't count.
@@ -72,7 +72,7 @@ public abstract class ControlPacket {
             case BYE:
                 return ByePacket.decode(buffer, hasPadding, innerBlocks, length);
             case APP_DATA:
-                return null;
+                return AppDataPacket.decode(buffer, type, controlPacketType, length);
             default:
                 throw new IllegalArgumentException("Unknown RTCP packet type: " + controlPacketType + " = " + type);
         }
@@ -136,7 +136,8 @@ public abstract class ControlPacket {
                 case (byte) 0xcc:
                     return APP_DATA;
                 default:
-                    throw new IllegalArgumentException("Unknown RTCP packet type: " + b);
+                	return APP_DATA;
+                    //throw new IllegalArgumentException("Unknown RTCP packet type: " + b);
             }
         }
 

@@ -16,6 +16,8 @@
 
 package com.biasedbit.efflux.session;
 
+import java.net.SocketAddress;
+
 import com.biasedbit.efflux.packet.AppDataPacket;
 import com.biasedbit.efflux.packet.CompoundControlPacket;
 
@@ -24,7 +26,7 @@ import com.biasedbit.efflux.packet.CompoundControlPacket;
  */
 public interface RtpSessionControlListener {
 
-    void controlPacketReceived(RtpSession session, CompoundControlPacket packet);
+    void controlPacketReceived(RtpSession session, SocketAddress origin, CompoundControlPacket packet);
 
-    void appDataReceived(RtpSession session, AppDataPacket appDataPacket);
+    void appDataReceived(RtpSession session, SocketAddress origin, AppDataPacket appDataPacket);
 }
