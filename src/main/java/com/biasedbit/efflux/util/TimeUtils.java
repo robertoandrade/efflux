@@ -130,6 +130,10 @@ public class TimeUtils {
 
         Date dateTime = timestampToDateTime(timestamp);
         
+		return timestampToString(dateTime);
+    }
+
+	public static String timestampToString(Date dateTime) {
 		String dateString = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS").format(dateTime);
 
         /*
@@ -139,7 +143,7 @@ public class TimeUtils {
 		*/
         
         return dateString; // + fractionSting;
-    }
+	}
 
 	public static Date timestampToDateTime(double timestamp) {
 		if (timestamp==0) return null;
@@ -153,7 +157,6 @@ public class TimeUtils {
         //long ms = (long) (timestamp * 1000.0);
 
         // date/time
-        Date dateTime = new Date(ms);
-		return dateTime;
+        return new Date(ms);
 	}
 }
